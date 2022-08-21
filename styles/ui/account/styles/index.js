@@ -1,6 +1,9 @@
 import styled from 'styled-components/macro';
+import colorMap from '../../utility/color-config';
 
-export const Container = styled.div`
+export const Container = styled.div` 
+    cursor: pointer;
+    position: relative;
     text-align: center;
 `;
 
@@ -11,6 +14,7 @@ export const Circle = styled.div`
     border-radius: 100%;
     overflow: hidden;
     border: ${({ bordered }) => bordered ? `0.5px solid #ccc` : 'none'};
+    margin: auto;
 `;
 
 export const Square = styled.div`
@@ -20,6 +24,7 @@ export const Square = styled.div`
     border-radius: 5px;
     overflow: hidden;
     border: ${({ bordered }) => bordered ? `0.5px solid #ccc` : 'none'};
+    margin: auto;
 `;
 
 export const Text = styled.p`
@@ -28,10 +33,10 @@ export const Text = styled.p`
 
 export const Dot = styled.div`
     position: absolute;
-    top: 10%;
-    right: 0;
+    top: 7%;
+    right: -3%;
     height: 10px;
     width: 10px;
     border-radius: 100%;
-    color: ${({ self }) => self ? `${colorMap['primary'].normal}` : `${colorMap['success'].normal}`};
+    background-color: ${({ self }) => self ? `${colorMap['primary'].normal}` : `${colorMap['success'].dark1}`};
 `;

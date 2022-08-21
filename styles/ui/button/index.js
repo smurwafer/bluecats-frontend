@@ -52,7 +52,7 @@ const Button = ({
 Button.propTypes = {
     size: PropTypes.oneOf(['large', 'medium', 'small']),
     borderRadius: PropTypes.number,
-    color: PropTypes.oneOf(['primary', 'secondary', 'danger', 'warning', 'success', 'dark']).isRequired,
+    color: PropTypes.oneOf(['primary', 'secondary', 'danger', 'warning', 'success', 'dark']),
     block: PropTypes.bool,
     loading: PropTypes.bool,
     upload: PropTypes.bool,

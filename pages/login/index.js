@@ -1,5 +1,5 @@
 import Auth from "../../components/auth";
-import { Container, Wrapper } from "./styles";
+import { Container, Wrapper } from "../../styles/pages/login";
 
 const LoginPage = () => {
     return (

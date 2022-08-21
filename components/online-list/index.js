@@ -7,13 +7,16 @@ const OnlineList = ({ list = [] }) => {
         <Container>
             <Legend>Online Users</Legend>
             <List>
-                {list.map(({ image }) => (
-                    <Account
-                        url={image}
-                        type={'square'}
-                        size={55}
-                        online={true}
-                    />
+                {list.map(({ image, self }) => (
+                    <ListItem>
+                        <Account
+                            url={image}
+                            type={'square'}
+                            size={100}
+                            online={true}
+                            self={self}
+                        />
+                    </ListItem>
                 ))}
             </List>  
             <Space vertical={20} />

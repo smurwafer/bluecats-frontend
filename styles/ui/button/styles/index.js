@@ -2,7 +2,7 @@ import styled from 'styled-components/macro';
 
 export const Btn = styled.button`
     padding: ${({ padding }) => `${padding}px`};
-    width: ${({ block }) => block ? '100%' : 'min-content'};
+    width: ${({ block }) => block ? '100%' : 'fit-content'};
     background-color: ${({ color }) => color};
     font-size: ${({ fontSize }) => `${fontSize}px`};
     border-radius: ${({ borderRadius }) => `${borderRadius}px`};

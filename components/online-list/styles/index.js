@@ -15,3 +15,7 @@ export const List = styled.div`
     align-items: center;
     overflow: auto;
 `;
+
+export const ListItem = styled.div`
+    margin: 10px;
+`;

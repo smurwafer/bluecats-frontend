@@ -16,31 +16,10 @@ export const Display = styled.div`
     overflow: hidden;
 `;
 
-export const Live = styled.div`
-    z-index: 20;
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background-color: ${() => `${colorMap['danger'].normal}`};
-    border-radius: 5px;
-    text-align: center;
-    padding: 5px;
-`;
-
 export const Text = styled.p`
     font-size: 13px;
     color: #fff;
     margin: 0;
-`;
-
-export const Views = styled.div`
-    z-index: 20;
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
 `;
 
 export const Creator = styled.div`

@@ -92,6 +92,33 @@ const Home = () => {
     },
   ];
 
+  const onlineList = [
+    {
+      id: 'u01',
+      userName: 'john@32',
+      image: '/images/profiles/profile01.jpg',
+      self: true,
+    },
+    {
+      id: 'u01',
+      userName: 'john@32',
+      image: '/images/profiles/profile01.jpg',
+      self: false,
+    },
+    {
+      id: 'u01',
+      userName: 'john@32',
+      image: '/images/profiles/profile01.jpg',
+      self: false,
+    },
+    {
+      id: 'u01',
+      userName: 'john@32',
+      image: '/images/profiles/profile01.jpg',
+      self: false,
+    },
+  ];
+
   return (
     <Container>
       <Header
@@ -102,7 +129,7 @@ const Home = () => {
         name={'Charlie Green'}
         rating={4.4}
       />
-      <OnlineList />
+      <OnlineList list={onlineList} />
       <StreamList
         legend={'Trending Today'}
         list={list}
