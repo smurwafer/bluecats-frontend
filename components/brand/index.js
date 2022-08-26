@@ -4,9 +4,11 @@ import { Container, Text } from "./styles";
 
 const Brand = ({ fontSize = 30 }) => {
     return (
-        <Text fontSize={fontSize}>
-            {config.appName}
-        </Text>
+        <Container>
+            <Text fontSize={fontSize}>
+                {config.appName}
+            </Text>
+        </Container>
     );
 }
 

@@ -1,3 +1,4 @@
+import { getSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import ChannelCard from '../../components/channel-card';
 import ProfileCard from '../../components/profile-card';
@@ -79,6 +80,24 @@ const ProfilePage = () => {
             </LowerSection>
         </Container>
     );
+}
+
+export const getServerSideProps = async ({ req }) => {
+  const session = await getSession({ req });
+  if (!session || !session.currentUser) {
+    return {
+      redirect: {
+        destination: '/guest',
+        permament: false,
+      }
+    };
+  }
+
+  return {
+    props: {
+      session,
+    }
+  }
 }
 
 export default ProfilePage;

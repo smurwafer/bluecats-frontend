@@ -1,3 +1,4 @@
+import { getSession, useSession } from 'next-auth/react';
 import Header from '../components/header';
 import OnlineList from '../components/online-list';
 import StreamList from '../components/stream-list';
@@ -5,6 +6,8 @@ import { Container } from '../styles/pages/home';
 import Space from '../styles/ui/space';
 
 const Home = () => {
+  const { data: session, status } = useSession();
+
   const list = [
     {
       id: 's01',
@@ -145,6 +148,24 @@ const Home = () => {
       <Space vertical={30} />
     </Container>    
   );
+}
+
+export const getServerSideProps = async ({ req }) => {
+  const session = await getSession({ req });
+  if (!session || !session.currentUser) {
+    return {
+      redirect: {
+        destination: '/guest',
+        permament: false,
+      }
+    };
+  }
+
+  return {
+    props: {
+      session,
+    }
+  }
 }
 
 export default Home;

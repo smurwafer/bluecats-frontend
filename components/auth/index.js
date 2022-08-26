@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { useRouter } from 'next/router';
 import { useState } from "react";
 import Button from "../../styles/ui/button";
 import Image from "../../styles/ui/image";
@@ -13,21 +14,30 @@ import { Container, Display, FieldArea, Form, FormHeader, FormSection, PrevIcon,
 import { BiArrowBack } from 'react-icons/bi';
 import colorMap from '../../styles/ui/utility/color-config';
 import Pincoder from '../../styles/ui/pincoder';
+import { getSession, signIn } from 'next-auth/react';
+import { errConfig } from '../../utility/error-config';
+import { useDispatch } from 'react-redux';
+import { signup } from '../../store/actions';
+import { message } from 'antd';
+import getList from '../../styles/ui/pinboard/config/list';
 
 const Auth = ({ type = 'login' }) => {
+    const router = useRouter();
+    const dispatch = useDispatch();
+
     // prev icon props
     const iconSize = 24;
     const iconColor = colorMap['secondary'].normal;
 
 
     // login credentials
-    const [userNameOrEmail, setUserNameOrEmail] = useState('');
+    const [userNameOrEmailOrPhone, setUserNameOrEmailOrPhone] = useState('');
     const [password, setPassword] = useState('');
 
     // signup credentials
     const [userName, setUserName] = useState('');
     const [email, setEmail] = useState('');
-    const [mobile, setMobile] = useState('');
+    const [phone, setPhone] = useState('');
     const [gender, setGender] = useState('male');
     const [age, setAge] = useState(18);
     const [imageUrl, setImageUrl] = useState('');
@@ -37,6 +47,7 @@ const Auth = ({ type = 'login' }) => {
 
     // page
     const [page, setPage] = useState(0);
+    const [loading, setLoading] = useState(false);
 
     const next = (e) => {
         e.preventDefault();
@@ -58,13 +69,52 @@ const Auth = ({ type = 'login' }) => {
         });
     }
 
-    const login = (e) => {
-        e.preventDefault();
+    const loginHandler = async () => {
+        setLoading(true);
 
+        try { 
+            const result = await signIn('credentials', { redirect: false, userNameOrEmailOrPhone, password });
+            if (result.error) {
+                throw new Error(result.error);
+            }
+
+            console.log('login result',result);
+    
+            setLoading(false);
+            router.push('/');
+        } catch (err) {
+            setLoading(false);
+            const errMsg = errConfig(err, 'Login Failed!');
+            message.error({
+                content: errMsg
+            });
+        }
     }
 
-    const signup = (e) => {
+    const signupHandler = async () => {
+        setLoading(true);
+
+        const interestList = getList(interests);
+
+        try {
+            await dispatch(signup({ email, userName, phone, password, age, gender, imageUrl, interests: interestList }));
+            setLoading(false);
+        } catch (err) {
+            setLoading(false);
+            const errMsg = errConfig(err, 'Signup Failed!');
+            message.error({
+                content: errMsg
+            });
+        }
+    }
+
+    const submitHandler = async (e) => {
         e.preventDefault();
+        if (type === 'login') {
+            await loginHandler();
+        } else {
+            await signupHandler();
+        }
     }
 
     const done = (e) => {
@@ -79,9 +129,9 @@ const Auth = ({ type = 'login' }) => {
                     <Brand />
                     <Space vertical={40} />
                     <Input
-                        placeholder={'Username or Email'}
-                        text={userNameOrEmail}
-                        setText={setUserNameOrEmail}
+                        placeholder={'Username or Email or Phone'}
+                        text={userNameOrEmailOrPhone}
+                        setText={setUserNameOrEmailOrPhone}
                         type={'text'}
                     />
                     <Space vertical={20} />
@@ -92,7 +142,7 @@ const Auth = ({ type = 'login' }) => {
                         type={'password'}
                     />
                     <Space flexed />
-                    <Button block onClick={login}>Login</Button>
+                    <Button block type={'submit'}>Login</Button>
                     <Space vertical={10} />
                     <Text>Or</Text>
                     <Space vertical={10} />
@@ -129,21 +179,21 @@ const Auth = ({ type = 'login' }) => {
                     <Space vertical={30} />
                 </FormSection>,
 
-                <FormSection>
-                    <FormHeader>
-                        <PrevIcon>
-                            <BiArrowBack size={iconSize} color={iconColor} onClick={prev} />
-                        </PrevIcon>
-                    </FormHeader>
-                    <Pincoder
-                        type={'email'}
-                        legend={'Email verification'}
-                        text={'An verification code has been sent to your entered email address, please enter that code for verification here.'}
-                    />
-                    <Space flexed />
-                    <Button block onClick={next}>Next</Button>
-                    {/* <Space vertical={10} /> */}
-                </FormSection>,
+                // <FormSection>
+                //     <FormHeader>
+                //         <PrevIcon>
+                //             <BiArrowBack size={iconSize} color={iconColor} onClick={prev} />
+                //         </PrevIcon>
+                //     </FormHeader>
+                //     <Pincoder
+                //         type={'email'}
+                //         legend={'Email verification'}
+                //         text={'An verification code has been sent to your entered email address, please enter that code for verification here.'}
+                //     />
+                //     <Space flexed />
+                //     <Button block onClick={next}>Next</Button>
+                //     {/* <Space vertical={10} /> */}
+                // </FormSection>,
 
                 <FormSection>
                     <FormHeader>
@@ -153,9 +203,9 @@ const Auth = ({ type = 'login' }) => {
                     </FormHeader>
                     <Space vertical={20} />
                     <Input
-                        placeholder={'Mobile'}
-                        text={mobile}
-                        setText={setMobile}
+                        placeholder={'Phone'}
+                        text={phone}
+                        setText={setPhone}
                         type={'text'}
                     />
                     <Space vertical={10} />
@@ -215,7 +265,7 @@ const Auth = ({ type = 'login' }) => {
                         type={'password'}
                     />
                     <Space flexed />
-                    <Button block onClick={next}>Signup</Button>
+                    <Button block onClick={next}>Next</Button>
                 </FormSection>,
 
                 <FormSection>
@@ -231,7 +281,7 @@ const Auth = ({ type = 'login' }) => {
                         setSelectedPins={setInterests}
                     />
                     <Space flexed />
-                    <Button block onClick={done}>Done</Button>
+                    <Button block type={'submit'}>Done</Button>
                 </FormSection>,
             ]
         },
@@ -246,7 +296,7 @@ const Auth = ({ type = 'login' }) => {
                 />
             </Display>
             <FieldArea>
-                <Form>
+                <Form onSubmit={submitHandler}>
                     {authPages[type].pageList[page]}
                 </Form>
             </FieldArea>

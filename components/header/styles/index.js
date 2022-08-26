@@ -1,8 +1,9 @@
 import styled from 'styled-components/macro';
 
 export const Container = styled.div`
-    height: 400px;
+    height: 50%;
     width: 100%;
+    box-sizing: border-box;
 `;
 
 export const Background = styled.div`
@@ -12,9 +13,11 @@ export const Background = styled.div`
     padding: 40px;
     background: ${({ url }) => `url(${url}) no-repeat center`};
     background-size: 100%;
+    background-clip: border-box;
 `;
 
 export const Detail = styled.div`
+    height: 100%;
     width: 40%;
 `;
 

@@ -1,3 +1,4 @@
+import { getSession } from 'next-auth/react';
 import Feature from '../../components/feature';
 import { Container, Header, HeaderButtons, HeaderTextArea, HeaderDisplay, HeaderLabel, HeaderDisplaySection, HeaderTextSection } from '../../styles/pages/guest';
 import Button from '../../styles/ui/button';
@@ -54,6 +55,24 @@ const GuestPage = () => {
             }
         </Container>
     );
+}
+
+export const getServerSideProps = async ({ req }) => {
+    const session = await getSession({ req });
+    if (session && session.currentUser) {
+        return {
+        redirect: {
+            destination: '/',
+            permament: false,
+        }
+        };
+    }
+
+    return {
+        props: {
+        session,
+        }
+    }
 }
 
 export default GuestPage;

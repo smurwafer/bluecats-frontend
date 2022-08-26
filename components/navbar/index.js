@@ -1,15 +1,18 @@
+import { useSession } from "next-auth/react";
 import Brand from "../brand";
 import { Container, Navitem, Navlink, Section } from "./styles";
 
 const Navbar = () => {
-    const isAuthenticated = true;
+    const { data : session, status } = useSession();
+
+    const isAuthenticated = status === "authenticated";
 
     const guestNavs = [
-        {
-            id: 'guest',
-            name: 'Guest',
-            path: '/',
-        },
+        // {
+        //     id: 'guest',
+        //     name: 'Guest',
+        //     path: '/',
+        // },
         {
             id: 'login',
             name: 'Login',

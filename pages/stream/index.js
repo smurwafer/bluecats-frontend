@@ -1,3 +1,4 @@
+import { getSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import ChannelCard from '../../components/channel-card';
 import { Container, Legend, Text, ChannelList, ChannelItem } from '../../styles/pages/stream';
@@ -57,6 +58,24 @@ const StreamPage = () => {
             </ChannelList>
         </Container>
     );
+}
+
+export const getServerSideProps = async ({ req }) => {
+  const session = await getSession({ req });
+  if (!session || !session.currentUser) {
+    return {
+      redirect: {
+        destination: '/guest',
+        permament: false,
+      }
+    };
+  }
+
+  return {
+    props: {
+      session,
+    }
+  }
 }
 
 export default StreamPage;

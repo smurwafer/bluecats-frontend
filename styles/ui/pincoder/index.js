@@ -5,7 +5,6 @@ import digitMap from './config/digits';
 import { Container, Legend, Text, BlockList, BlockItem, BlockInput } from "./styles";
 
 const Pincoder = ({ legend, text, type }) => {
-    const currentRef = useRef();
     const [blockIndex, setBlockIndex] = useState(0);
     const [activeBlockId, setActiveBlockId] = useState(digitMap[type].blocks[0].id);
     const [blocks, setBlocks] = useState(digitMap[type].blocks);

@@ -1,3 +1,4 @@
+import { getSession } from 'next-auth/react';
 import { useState } from 'react';
 import CommentTool from '../../components/comment-tool';
 import StreamList from '../../components/stream-list';
@@ -210,8 +211,19 @@ const StreamViewPage = ({ stream }) => {
 }
 
 export const getServerSideProps = async () => { 
+    const session = await getSession({ req });
+    if (!session || !session.currentUser) {
+      return {
+        redirect: {
+          destination: '/guest',
+          permament: false,
+        }
+      };
+    }
+
     return {
         props: {
+            session,
             stream: {
                 id: 's01',
                 title: 'GTA-V Online',

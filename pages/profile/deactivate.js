@@ -1,3 +1,4 @@
+import { getSession } from 'next-auth/react';
 import { useState } from 'react';
 import { Container, Form, FormSection } from '../../styles/pages/profile/deactivate';
 import Button from '../../styles/ui/button';
@@ -27,6 +28,24 @@ const ProfileDeactivatePage = () => {
             </FormSection>
         </Container>
     );
+}
+
+export const getServerSideProps = async ({ req }) => {
+  const session = await getSession({ req });
+  if (!session || !session.currentUser) {
+    return {
+      redirect: {
+        destination: '/guest',
+        permament: false,
+      }
+    };
+  }
+
+  return {
+    props: {
+      session,
+    }
+  }
 }
 
 export default ProfileDeactivatePage;

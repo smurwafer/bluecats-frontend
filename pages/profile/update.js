@@ -1,3 +1,4 @@
+import { getSession } from 'next-auth/react';
 import { useState } from 'react';
 import { Container, Display, DisplayContainer, DisplaySection, Form, FormSection, Info, Label, Text, TextContainer } from '../../styles/pages/profile/update';
 import Button from '../../styles/ui/button';
@@ -59,6 +60,24 @@ const ProfileUpdatePage = () => {
             </FormSection>
         </Container>
     );
+}
+
+export const getServerSideProps = async ({ req }) => {
+  const session = await getSession({ req });
+  if (!session || !session.currentUser) {
+    return {
+      redirect: {
+        destination: '/guest',
+        permament: false,
+      }
+    };
+  }
+
+  return {
+    props: {
+      session,
+    }
+  }
 }
 
 export default ProfileUpdatePage;

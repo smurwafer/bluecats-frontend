@@ -14,6 +14,7 @@ const Button = ({
     upload = false,
     onClick,
     onSelectFile,
+    ...props
 }) => { 
     const uploadRef = useRef();
 
@@ -35,7 +36,7 @@ const Button = ({
                         onSelectFile(e.target.files)
                     }}
                 />
-                <Btn borderRadius={borderRadius} color={colorMap[color].normal} block={block} {...sizeMap[size]} onClick={selectFileHandler}>
+                <Btn borderRadius={borderRadius} color={colorMap[color].normal} block={block} {...sizeMap[size]} onClick={selectFileHandler} {...props}>
                     {children}
                 </Btn>
             </Fragment>
@@ -43,7 +44,7 @@ const Button = ({
     }
 
     return (
-        <Btn borderRadius={borderRadius} color={colorMap[color].normal} block={block} {...sizeMap[size]} onClick={onClick}>
+        <Btn borderRadius={borderRadius} color={colorMap[color].normal} block={block} {...sizeMap[size]} onClick={onClick} {...props}> 
             {children}
         </Btn>
     );

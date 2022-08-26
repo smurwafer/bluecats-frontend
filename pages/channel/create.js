@@ -1,3 +1,4 @@
+import { getSession } from 'next-auth/react';
 import { useState } from 'react';
 import ProfileCard from '../../components/profile-card';
 import { ButtonContainer, Container, Display, Text, FieldContainer, HolderItem, HolderList, Info, InputContainer, LowerSection, MiddleSection, PinboardContainer, SearchContainer, ThemeDisplay, UpperSection, ThemeInputContainer } from '../../styles/pages/channel/create';
@@ -120,6 +121,24 @@ const CreatePage = () => {
             </LowerSection>
         </Container>
     );
+}
+
+export const getServerSideProps = async ({ req }) => {
+  const session = await getSession({ req });
+  if (!session || !session.currentUser) {
+    return {
+      redirect: {
+        destination: '/guest',
+        permament: false,
+      }
+    };
+  }
+
+  return {
+    props: {
+      session,
+    }
+  }
 }
 
 export default CreatePage;

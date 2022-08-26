@@ -1,3 +1,4 @@
+import { getSession } from 'next-auth/react';
 import { useState } from 'react';
 import ActionCard from '../../components/action-card';
 import GalleryList from '../../components/gallery-list';
@@ -56,6 +57,24 @@ const StreamCreatePage = () => {
             </InfoSection>
         </Container>
     );
+}
+
+export const getServerSideProps = async ({ req }) => {
+  const session = await getSession({ req });
+  if (!session || !session.currentUser) {
+    return {
+      redirect: {
+        destination: '/guest',
+        permament: false,
+      }
+    };
+  }
+
+  return {
+    props: {
+      session,
+    }
+  }
 }
 
 export default StreamCreatePage;

@@ -1,3 +1,4 @@
+import { getSession } from "next-auth/react";
 import { useState } from "react";
 import SearchResult from "../../components/search-result";
 import SearchTool from "../../components/search-tool";
@@ -238,6 +239,27 @@ const ExplorePage = () => {
             </ResultSection>
         </Container>
     );
+}
+
+export const getServerSideProps = async ({ req }) => {
+    const session = await getSession({ req });
+    
+    console.log('explore page', session);
+
+    if (!session || !session.currentUser) {
+        return {
+        redirect: {
+            destination: '/guest',
+            permament: false,
+        }
+        };
+    }
+
+    return {
+        props: {
+        session,
+        }
+    }
 }
 
 export default ExplorePage;

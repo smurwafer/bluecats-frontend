@@ -1,0 +1,14 @@
+export const AUTH_SUCCESS = 'AUTH_SUCCESS';
+export const AUTH_LOGOUT = 'AUTH_LOGOUT';
+
+export const SET_USERS = 'SET_USERS';
+export const SET_CURRENT_USER = 'SET_CURRENT_USER';
+export const USER_SUCCESS = 'USER_SUCCESS';
+
+export const GALLERY_SUCCESS = 'GALLERY_SUCCESS';
+
+export const SET_WALLET = 'SET_WALLET';
+export const WALLET_SUCCESS = 'WALLET_SUCCESS';
+
+export const SET_HISTORY = 'SET_HISTORY';
+export const HISTORY_SUCCESS = 'HISTORY_SUCCESS';
