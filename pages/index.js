@@ -6,8 +6,6 @@ import { Container } from '../styles/pages/home';
 import Space from '../styles/ui/space';
 
 const Home = () => {
-  const { data: session, status } = useSession();
-
   const list = [
     {
       id: 's01',

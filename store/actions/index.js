@@ -17,3 +17,5 @@ export {
     addGallery,
     removeGallery,
 } from './gallery';
+
+export { fetchChannels } from './channel';

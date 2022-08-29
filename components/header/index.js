@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import Account from "../../styles/ui/account";
-import { Background, Container, Creator, Description, Detail, Info, Name, Play, Profile, Ratings, Title } from "./styles";
+import { Background, Container, Creator, Description, Detail, Info, Name, Overlay, Play, Profile, Ratings, Title } from "./styles";
 import { AiFillStar } from 'react-icons/ai';
 import { BsPlayCircle } from 'react-icons/bs';
 import Space from '../../styles/ui/space';
@@ -12,38 +12,40 @@ const Header = ({ title, name, description, creatorUrl, backgroundUrl, rating })
     return (
         <Container>
             <Background url={backgroundUrl}>
-                <Detail>
-                    <Title>{title}</Title>
-                    <Space vertical={20} />
-                    <Description>
-                        {description}
-                    </Description>
-                    <Space vertical={30} />
-                    <Creator>
-                        <Profile>
-                            <Account
-                                url={creatorUrl}
-                                size={70}
-                                type={'square'}
-                            />
-                        </Profile>
-                        <Space horizontal={20} />
-                        <Info>
-                            <Name>{name}</Name>
-                            <Space vertical={10} />
-                            <Ratings>
-                                <AiFillStar size={iconSize} color={iconColor} />
-                                <AiFillStar size={iconSize} color={iconColor} />
-                                <AiFillStar size={iconSize} color={iconColor} />
-                                <AiFillStar size={iconSize} color={iconColor} />
-                                <AiFillStar size={iconSize} color={iconColor} />
-                            </Ratings>
-                        </Info>
-                    </Creator>
-                </Detail>
-                <Play>
-                    <BsPlayCircle size={100} color={'#fff'} />
-                </Play>
+                <Overlay>
+                    <Detail>
+                        <Title>{title}</Title>
+                        <Space vertical={20} />
+                        <Description>
+                            {description}
+                        </Description>
+                        <Space vertical={30} />
+                        <Creator>
+                            <Profile>
+                                <Account
+                                    url={creatorUrl}
+                                    size={70}
+                                    type={'square'}
+                                />
+                            </Profile>
+                            <Space horizontal={20} />
+                            <Info>
+                                <Name>{name}</Name>
+                                <Space vertical={10} />
+                                <Ratings>
+                                    <AiFillStar size={iconSize} color={iconColor} />
+                                    <AiFillStar size={iconSize} color={iconColor} />
+                                    <AiFillStar size={iconSize} color={iconColor} />
+                                    <AiFillStar size={iconSize} color={iconColor} />
+                                    <AiFillStar size={iconSize} color={iconColor} />
+                                </Ratings>
+                            </Info>
+                        </Creator>
+                    </Detail>
+                    <Play>
+                        <BsPlayCircle size={100} color={'#fff'} />
+                    </Play>
+                </Overlay>
             </Background>
         </Container>
     );

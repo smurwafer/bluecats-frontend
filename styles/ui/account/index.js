@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import Image from "../image";
+import Space from '../space';
 import AccountType from '../utility/category/account-type';
 import { Circle, Container, Dot, Square, Text } from "./styles";
 
@@ -13,6 +14,7 @@ const Account = ({ type = AccountType.Circle, online = false, size = 30, url, ti
                         alt={title}
                     />
                 </Circle>
+                {title && <Space vertical={10} />}
                 {title && <Text>{title}</Text>}
                 {online && <Dot self={self} />}
             </Container>
@@ -27,6 +29,7 @@ const Account = ({ type = AccountType.Circle, online = false, size = 30, url, ti
                     alt={title}
                 />
             </Square>
+            {title && <Space vertical={10} />}
             {title && <Text>{title}</Text>}
             {online && <Dot self={self} />}
         </Container>

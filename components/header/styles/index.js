@@ -1,7 +1,7 @@
 import styled from 'styled-components/macro';
 
 export const Container = styled.div`
-    height: 50%;
+    /* height: 50%; */
     width: 100%;
     box-sizing: border-box;
 `;
@@ -10,10 +10,17 @@ export const Background = styled.div`
     position: relative;
     height: 100%;
     width: 100%;
-    padding: 40px;
-    background: ${({ url }) => `url(${url}) no-repeat center`};
+    background: ${({ url }) => `url(${url}) no-repeat`};
     background-size: 100%;
     background-clip: border-box;
+`;
+
+export const Overlay = styled.div`
+    position: relative;
+    height: 100%;
+    width: 100%;
+    padding: 40px;
+    background-color: rgba(0, 0, 0, 0.5);
 `;
 
 export const Detail = styled.div`

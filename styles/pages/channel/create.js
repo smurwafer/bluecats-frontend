@@ -57,6 +57,7 @@ export const PinboardContainer = styled.div`
 `;
 
 export const ThemeDisplay = styled.div`
+    position: relative;
     width: 100%;
     height: 300px;
     background-color: ${() => `${colorMap['secondary'].light2}`};
@@ -81,6 +82,7 @@ export const HolderList = styled.div`
     border-radius: 5px;
     overflow: hidden;
     border: 0.5px solid #ccc;
+    min-height: 140px;
 `;
 
 export const HolderItem = styled.div`

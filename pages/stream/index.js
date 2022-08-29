@@ -1,38 +1,13 @@
 import { getSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
+import { buildClient } from '../../axios-config';
 import ChannelCard from '../../components/channel-card';
 import { Container, Legend, Text, ChannelList, ChannelItem } from '../../styles/pages/stream';
 import Space from '../../styles/ui/space';
+import { header } from '../../utility/header';
 
-const StreamPage = () => {
+const StreamPage = ({ channels = [] }) => {
     const router = useRouter();
-
-    const channels = [
-        {
-            id: 'c01',
-            name: 'Gamerz',
-            subscribers: '1.3k',
-            image: '/images/photos/photo09.jpg',
-        },
-        {
-            id: 'c02',
-            name: 'Gamerz',
-            subscribers: '1.3k',
-            image: '/images/photos/photo09.jpg',
-        },
-        {
-            id: 'c03',
-            name: 'Gamerz',
-            subscribers: '1.3k',
-            image: '/images/photos/photo09.jpg',
-        },
-        {
-            id: 'c04',
-            name: 'Gamerz',
-            subscribers: '1.3k',
-            image: '/images/photos/photo09.jpg',
-        },
-    ];
 
     const goToChannelCreate = () => {
         router.push('/channel/create');
@@ -61,21 +36,26 @@ const StreamPage = () => {
 }
 
 export const getServerSideProps = async ({ req }) => {
-  const session = await getSession({ req });
-  if (!session || !session.currentUser) {
-    return {
-      redirect: {
-        destination: '/guest',
-        permament: false,
-      }
-    };
-  }
-
-  return {
-    props: {
-      session,
+    const session = await getSession({ req });
+    if (!session || !session.currentUser) {
+        return {
+        redirect: {
+            destination: '/guest',
+            permament: false,
+        }
+        };
     }
-  }
+
+    const client = buildClient({ req });
+    const { data: { channels } } = await client.get('channel?holder=' + session.currentUser.id, header(session.jwt));
+    console.log('channels', channels);
+
+    return {
+        props: {
+            session,
+            channels,
+        }
+    }
 }
 
 export default StreamPage;

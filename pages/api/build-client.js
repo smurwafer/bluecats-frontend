@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { baseUrl } from '../../utility/base-url';
 
-const buildClient = ({ req }) => {
+const buildClient = (req) => {
     if(typeof window === 'undefined') {
         return axios.create({
             baseURL: baseUrl,

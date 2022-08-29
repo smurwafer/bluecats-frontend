@@ -13,12 +13,13 @@ export default NextAuth({
     providers: [
         Providers({
             credentials: {
-                userNameOrEmailOrMobile: { label: 'Username Or Email Or Mobile', type: 'text', placeholder: 'Username Or Email Or Mobile' },
+                userNameOrEmailOrPhone: { label: 'Username Or Email Or Phone', type: 'text', placeholder: 'Username Or Email Or Phone' },
                 password: { label: 'Password', type: 'password', placeholder: 'Password' },
             },
-            authorize: async ({ userNameOrEmailOrPassword, password }) => {
+            authorize: async ({ userNameOrEmailOrPhone, password }) => {
                 try { 
-                    const { data } = await axios.post('auth/login', { userNameOrEmailOrPassword, password });
+                    const { data } = await axios.post('auth/login', { userNameOrEmailOrPhone, password });
+                    console.log('login response', data);
                     return Promise.resolve({
                         jwt: data.token,
                         currentUser: data.currentUser,
@@ -39,7 +40,7 @@ export default NextAuth({
             return Promise.resolve(token);
         },
         session: async ({ session, token, user }) => {
-            console.log(token);
+            // console.log(token);
             if (token) {
                 session.currentUser = token.user;
                 session.jwt = token.jwt;

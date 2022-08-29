@@ -20,6 +20,7 @@ export const Display = styled.div`
     margin: auto;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 `;
 
 export const Icon = styled.div`

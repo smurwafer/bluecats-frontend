@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../../styles/ui/button";
 import Image from "../../styles/ui/image";
 import Input from "../../styles/ui/input";
@@ -13,22 +13,21 @@ import Brand from "../brand";
 import { Container, Display, FieldArea, Form, FormHeader, FormSection, PrevIcon, Text } from "./styles";
 import { BiArrowBack } from 'react-icons/bi';
 import colorMap from '../../styles/ui/utility/color-config';
-import Pincoder from '../../styles/ui/pincoder';
-import { getSession, signIn } from 'next-auth/react';
+import { signIn } from 'next-auth/react';
 import { errConfig } from '../../utility/error-config';
-import { useDispatch } from 'react-redux';
-import { signup } from '../../store/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { addGallery, signup } from '../../store/actions';
 import { message } from 'antd';
 import getList from '../../styles/ui/pinboard/config/list';
 
 const Auth = ({ type = 'login' }) => {
     const router = useRouter();
     const dispatch = useDispatch();
+    const galleryItem = useSelector(state => state.gly.galleryItem);
 
     // prev icon props
     const iconSize = 24;
     const iconColor = colorMap['secondary'].normal;
-
 
     // login credentials
     const [userNameOrEmailOrPhone, setUserNameOrEmailOrPhone] = useState('');
@@ -38,7 +37,7 @@ const Auth = ({ type = 'login' }) => {
     const [userName, setUserName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
-    const [gender, setGender] = useState('male');
+    const [gender, setGender] = useState('Male');
     const [age, setAge] = useState(18);
     const [imageUrl, setImageUrl] = useState('');
     const [image, setImage] = useState();
@@ -48,6 +47,10 @@ const Auth = ({ type = 'login' }) => {
     // page
     const [page, setPage] = useState(0);
     const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        console.log('image file', image);
+    }, [image]);
 
     const next = (e) => {
         e.preventDefault();
@@ -69,6 +72,25 @@ const Auth = ({ type = 'login' }) => {
         });
     }
 
+    const save = async (e) => {
+        e.preventDefault();
+        try { 
+            const formData = new FormData();
+            formData.append('caption', '');
+            formData.append('url', imageUrl);
+            formData.append('type', 'image');
+            formData.append('image', image);
+            console.log(formData);
+            await dispatch(addGallery(formData));
+            next(e);
+        } catch (err) {
+            const errMsg = errConfig(err, 'Gallery Save Failed!');
+            message.error({
+                content: errMsg
+            });
+        }
+    }
+
     const loginHandler = async () => {
         setLoading(true);
 
@@ -78,7 +100,7 @@ const Auth = ({ type = 'login' }) => {
                 throw new Error(result.error);
             }
 
-            console.log('login result',result);
+            // console.log('login result',result);
     
             setLoading(false);
             router.push('/');
@@ -97,8 +119,13 @@ const Auth = ({ type = 'login' }) => {
         const interestList = getList(interests);
 
         try {
-            await dispatch(signup({ email, userName, phone, password, age, gender, imageUrl, interests: interestList }));
+            await dispatch(signup({ email, userName, phone, password, age, gender, photo: galleryItem.id, interests: interestList }));
+            const result = await signIn('credentials', { redirect: false, userNameOrEmailOrPhone: userName, password });
+            if (result.error) {
+                throw new Error(result.error || 'Error signing in!');
+            }
             setLoading(false);
+            router.push('/');
         } catch (err) {
             setLoading(false);
             const errMsg = errConfig(err, 'Signup Failed!');
@@ -132,7 +159,6 @@ const Auth = ({ type = 'login' }) => {
                         placeholder={'Username or Email or Phone'}
                         text={userNameOrEmailOrPhone}
                         setText={setUserNameOrEmailOrPhone}
-                        type={'text'}
                     />
                     <Space vertical={20} />
                     <Input
@@ -241,7 +267,7 @@ const Auth = ({ type = 'login' }) => {
                         placeholder={'Profile Image URL'}
                     />
                     <Space flexed />
-                    <Button block onClick={next}>Next</Button>
+                    <Button block onClick={save}>Save and Next</Button>
                 </FormSection>,
 
                 <FormSection>

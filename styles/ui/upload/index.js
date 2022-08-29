@@ -13,6 +13,9 @@ const Upload = ({ imageUrl, setImageUrl, image, setImage, placeholder }) => {
         if (fileList.length === 0)
             return;
         const file = fileList[0];
+        const fileUrl = URL.createObjectURL(file);
+        console.log('fileUrl', fileUrl);
+        setImageUrl(fileUrl);
         setImage(file);
     }
 
@@ -20,10 +23,10 @@ const Upload = ({ imageUrl, setImageUrl, image, setImage, placeholder }) => {
         <Container>
             <DisplaySection>
                 <Display>
-                    {image || imageUrl.length ? <Image src={image ? image.path : imageUrl} alt={'display image'} /> : null}
-                    <Icon>
+                    {imageUrl.trim().length > 0 ? <Image src={imageUrl} alt={'display image'} /> : null}
+                    {!imageUrl || imageUrl.trim().length === 0 ? <Icon>
                         <GrFormAdd size={30} color={colorMap['secondary'].light1} />
-                    </Icon>
+                    </Icon> : null}
                 </Display>
                 <Space vertical={20} />
                 <Button

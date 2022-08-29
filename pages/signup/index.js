@@ -6,7 +6,7 @@ const SignupPage = () => {
     return (
         <Container>
             <Wrapper>
-                <Auth type='signup' />
+                <Auth type={'signup'} />
             </Wrapper>
         </Container>
     );

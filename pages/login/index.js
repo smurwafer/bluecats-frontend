@@ -6,7 +6,7 @@ const LoginPage = () => {
     return (
         <Container>
             <Wrapper>
-                <Auth />
+                <Auth type={'login'} />
             </Wrapper>
         </Container>
     );
