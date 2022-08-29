@@ -53,15 +53,16 @@ export const updateUser = (token, id, userData) => {
             await axios.put('user/' + id, userData, header(token));
             dispatch(userSuccess());
         } catch (err) {
+            console.log(err);
             throw err;
         }
     }
 }
 
-export const updateUserProfile = (token, imageIndex) => {
+export const updateProfile = (token, id, profileData) => {
     return async dispatch => {
         try {
-            const response = await axios.put('update-profile', { imageIndex }, header(token));
+            await axios.put('profile/' + id, profileData, header(token));
             dispatch(userSuccess());
         } catch (err) {
             throw err;

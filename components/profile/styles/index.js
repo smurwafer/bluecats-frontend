@@ -22,13 +22,14 @@ export const Display = styled.div`
 
 export const Info = styled.div`
     height: 100%;
-    width: 400px;
+    /* width: 50%; */
+    flex: 1;
     display: flex;
     flex-direction: column;
 `;
 
 export const UserName = styled.p`
-    font-size: 58px;
+    font-size: 48px;
     color: ${() => `${colorMap['primary'].normal}`};
     margin: 0;
 `;
@@ -46,20 +47,20 @@ export const InfoContainer = styled.div`
 `;
 
 export const Label = styled.p`
-    font-size: 18px;
+    font-size: 15px;
     color: ${() => `${colorMap['secondary'].normal}`};
     margin: 0;
     font-weight: 500;
 `;
 
 export const Text = styled.p`
-    font-size: 18px;
+    font-size: 15px;
     color: ${() => `${colorMap['secondary'].normal}`};
     margin: 0;
 `;
 
 export const Description = styled.p`
-    font-size: 18px;
+    font-size: 15px;
     color: ${() => `${colorMap['secondary'].normal}`};
     margin: 0;
 `;

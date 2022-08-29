@@ -31,6 +31,8 @@ const Profile = ({ user = {}, friends = [], channels = [] }) => {
                     <Space vertical={10} />
                     <Email>{user.email}</Email>
                     <Space vertical={10} />
+                    <Description>{user.profile.bio}</Description>
+                    <Space vertical={10} />
                     {user.profile.age && <InfoContainer>
                         <Label>Age :</Label>
                         <Space horizontal={5} />
@@ -41,11 +43,10 @@ const Profile = ({ user = {}, friends = [], channels = [] }) => {
                         <Space horizontal={5} />
                         <Text>{user.profile.gender}</Text>
                     </InfoContainer>}
-                    <Space vertical={10} />
-                    <Label>Interests</Label>
-                    <Space vertical={10} />
-                    <HashTags tags={user.profile.interests.map((item, index) => ({id: index, value: item}))} />
-                    <Description>{user.description}</Description>
+                    <Space vertical={5} />
+                    {user.profile.interests.length > 0 && <InfoContainer>
+                        <HashTags tags={user.profile.interests.map((item, index) => ({id: index, value: item}))} />
+                    </InfoContainer>}
                 </Info>
             </UpperSection>
             <Space vertical={40} />

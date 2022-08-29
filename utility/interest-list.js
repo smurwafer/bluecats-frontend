@@ -1,30 +1,30 @@
 const interestList = [
     {
-        id: 'i01',
+        id: 'Gaming',
         value: 'Gaming',
     },
     {
-        id: 'i02',
+        id: 'Travelling',
         value: 'Travelling',
     },
     {
-        id: 'i03',
+        id: 'Music',
         value: 'Music',
     },
     {
-        id: 'i04',
+        id: 'Blogs',
         value: 'Blogs',
     },
     {
-        id: 'i05',
+        id: 'Fashion',
         value: 'Fashion',
     },
     {
-        id: 'i06',
+        id: 'Movies',
         value: 'Movies',
     },
     {
-        id: 'i07',
+        id: 'Shows',
         value: 'Shows',
     },
 ];

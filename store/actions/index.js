@@ -10,7 +10,7 @@ export {
     deleteUser,
     fetchCurrentUser,
     updateUser,
-    updateUserProfile,
+    updateProfile,
 } from './user';
 
 export { 

@@ -18,6 +18,7 @@ export const DisplayContainer = styled.div`
 `;
 
 export const Display = styled.div`
+    position: relative;
     border-radius: 5px;
     height: 300px;
     width: 100%;
