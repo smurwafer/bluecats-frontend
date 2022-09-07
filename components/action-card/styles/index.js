@@ -6,7 +6,7 @@ export const Container = styled.div`
     width: 130px;
     height: 130px;
     border-radius: 5px;
-    border: 0.5px solid #ccc;
+    border: ${({ selected }) => !selected ? '0.5px solid #ccc' : `0.5px solid ${colorMap['primary'].normal}`};
     text-align: center;
     padding: 35px 16px;
     background-color: ${() => `${colorMap['secondary'].light2}`};
@@ -20,6 +20,6 @@ export const Icon = styled.div`
 
 export const Text = styled.p`
     margin: 0;
-    color: ${() => `${colorMap['primary'].normal}`};
-    font-size: 17px;
+    color: ${({ selected }) => selected ? `${colorMap['primary'].normal}` : `${colorMap['secondary'].normal}`};
+    font-size: 14px;
 `;

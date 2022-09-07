@@ -3,7 +3,7 @@ import styled from 'styled-components/macro';
 export const Container = styled.div`
     cursor: pointer;
     margin-top: 10px;
-    margin-right: 10px;
+    /* margin-right: 10px; */
 `;
 
 export const User = styled.div`

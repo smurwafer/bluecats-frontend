@@ -19,3 +19,17 @@ export {
 } from './gallery';
 
 export { fetchChannels } from './channel';
+
+export {
+    addStreamingChannel,
+    addStream,
+    deleteSteam,
+    fetchStreams,
+    updateSteam,
+} from './stream';
+
+export { 
+    addComment,
+    deleteComment,
+    updateComment,
+} from './comment';

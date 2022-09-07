@@ -14,6 +14,20 @@ export const Container = styled.div`
 export const Text = styled.p`
     font-size: 15px;
     color: ${() => `${colorMap['secondary'].normal}`};
+    margin: 0;
+    margin-right: 20px;
+
+    @media (max-width: 1000px) {
+        font-size: 13px;
+    }
+
+    @media (max-width: 600px) {
+        font-size: 12px;
+    }
+
+    @media (max-width: 405px) {
+        display: none;
+    }
 `;
 
 export const Actions = styled.div`
@@ -24,9 +38,17 @@ export const Actions = styled.div`
 
 export const Action = styled.div`
     cursor: pointer;
-    margin: 10px;
+    margin: 5px 10px 0px;
 
     :hover {
         color: ${() => `${colorMap['primary'].normal}`};
+    }
+
+    @media (max-width: 1000px) {
+        margin: 5px 8px 0px;
+    }
+
+    @media (max-width: 600px) {
+        margin: 5px 6px 0px;
     }
 `;

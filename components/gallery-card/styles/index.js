@@ -34,6 +34,7 @@ export const DotContainer = styled.div`
 `;
 
 export const Dot = styled.div`
+    cursor: pointer;
     border-radius: 100%;
     height: 7px;
     width: 7px;

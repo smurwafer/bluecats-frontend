@@ -22,12 +22,13 @@ const GuestPage = () => {
                         <HeaderLabel>
                             live streaming platform for everyone
                         </HeaderLabel>
+                        <Space vertical={20} />
                         <HeaderButtons>
-                            <Button borderRadius={10} block size='large'>
+                            <Button borderRadius={10} block>
                                 Join Today
                             </Button>
                             <Space horizontal={13} />
-                            <Button borderRadius={10} block size='large'>
+                            <Button borderRadius={10} block>
                                 Preview
                             </Button>
                         </HeaderButtons>
@@ -38,8 +39,6 @@ const GuestPage = () => {
                         <Image
                             src={headerInfo.src}
                             alt={'Header Display Photo'}
-                            height={400}
-                            width={600}
                         />
                     </HeaderDisplay>
                 </HeaderDisplaySection>

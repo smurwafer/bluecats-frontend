@@ -9,9 +9,20 @@ export const Container = styled.div`
     background-color: ${() => `${colorMap['secondary'].light2}`};
     overflow: hidden;
     padding: 20px;
+
+    @media (max-width: 800px) {
+        height: min-content;
+        padding: 0px;
+        background: none;
+        border: none;
+    }
 `;
 
 export const HistorySection = styled.div`
     height: 100%;
     overflow: scroll;
+
+    @media (max-width: 800px) {
+        display: none;
+    }
 `;

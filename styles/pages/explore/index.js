@@ -6,6 +6,10 @@ export const Container = styled.div`
     flex-direction: row;
     padding: 20px;
     position: fixed;
+
+    @media (max-width: 800px) {
+        display: block;
+    }
 `;
 
 export const SearchSection = styled.div`
@@ -21,11 +25,11 @@ export const TabSection = styled.div`
 `;
 
 export const ResultArea = styled.div`
-    height: 600px;
-    display: flex;
-    /* width: fit-content; */
-    overflow: auto;
-    flex-wrap: wrap;
-    /* justify-content: space-between; */
-    align-items: flex-start;
+    height: 550px;
+    overflow: scroll;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-rows: 300px;
+    gap: 10px;
 `;

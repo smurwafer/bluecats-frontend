@@ -3,6 +3,9 @@ import Stream from "../stream";
 import { Container, Legend, List } from "./styles";
 
 const StreamList = ({ legend, list = [] }) => { 
+    if (list.length === 0)
+        return null;
+
     return (
         <Container>
             <Legend>{legend}</Legend>

@@ -19,8 +19,7 @@ const Feature = ({ text, alt, illustration, reverse }) => {
                         <Image
                             src={illustration}
                             alt={alt}
-                            height={300}
-                            width={400}
+                            objectFit={'contain'}
                         />
                     </IllustrationDisplay>
                 </IllustrationSection>
@@ -35,8 +34,7 @@ const Feature = ({ text, alt, illustration, reverse }) => {
                     <Image
                         src={illustration}
                         alt={alt}
-                        height={300}
-                        width={400}
+                        objectFit={'contain'}
                     />
                 </IllustrationDisplay>
             </IllustrationSection>

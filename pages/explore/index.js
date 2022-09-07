@@ -1,14 +1,16 @@
 import { getSession } from "next-auth/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SearchResult from "../../components/search-result";
 import SearchTool from "../../components/search-tool";
 import { Container, ResultArea, ResultSection, SearchSection, TabSection } from "../../styles/pages/explore";
 import Space from "../../styles/ui/space";
 import Tabbar from "../../styles/ui/tab-bar";
 import SearchResultType from "../../utility/category/search-result-type";
+import { buildClient } from '../../axios-config';
+import { header } from '../../utility/header';
 
-const ExplorePage = () => {
-    const history = [
+const ExplorePage = ({ session, users }) => {
+    const [history, setHistory] = useState([
         {
             id: 'h01',
             text: 'Diatlov',
@@ -21,7 +23,7 @@ const ExplorePage = () => {
             id: 'h03',
             text: 'Australia Tour',
         },
-    ];
+    ]);
     const tabs = [
         {
             id: 't01',
@@ -40,7 +42,7 @@ const ExplorePage = () => {
         },
     ];
 
-    const results = [
+    const [results, setResults] = useState([
         {
             id: 'r01',
             type: SearchResultType.Stream,
@@ -112,114 +114,184 @@ const ExplorePage = () => {
             },
         },
         {
-            id: 'r02',
-            type: SearchResultType.Profile,
+            id: 'r24',
+            type: SearchResultType.Stream,
             item: {
-                userName: 'G6Homi',
-                image: '/images/profiles/profile01.jpg',
+                title: 'GTA-V Online',
+                image: '/images/photos/photo01.jpg',
+                creator: {
+                    userName: 'G6Homi',
+                    image: '/images/profiles/profile01.jpg',
+                },
+                views: '1.2k',
+                live: true,
             },
         },
         {
-            id: 'r03',
-            type: SearchResultType.Profile,
+            id: 'r25',
+            type: SearchResultType.Stream,
             item: {
-                userName: 'G6Homi',
-                image: '/images/profiles/profile01.jpg',
+                title: 'GTA-V Online',
+                image: '/images/photos/photo01.jpg',
+                creator: {
+                    userName: 'G6Homi',
+                    image: '/images/profiles/profile01.jpg',
+                },
+                views: '1.2k',
+                live: true,
             },
         },
         {
-            id: 'r04',
-            type: SearchResultType.Profile,
+            id: 'r26',
+            type: SearchResultType.Stream,
             item: {
-                userName: 'G6Homi',
-                image: '/images/profiles/profile01.jpg',
+                title: 'GTA-V Online',
+                image: '/images/photos/photo01.jpg',
+                creator: {
+                    userName: 'G6Homi',
+                    image: '/images/profiles/profile01.jpg',
+                },
+                views: '1.2k',
+                live: true,
             },
         },
         {
-            id: 'r05',
-            type: SearchResultType.Profile,
+            id: 'r27',
+            type: SearchResultType.Stream,
             item: {
-                userName: 'G6Homi',
-                image: '/images/profiles/profile01.jpg',
+                title: 'GTA-V Online',
+                image: '/images/photos/photo01.jpg',
+                creator: {
+                    userName: 'G6Homi',
+                    image: '/images/profiles/profile01.jpg',
+                },
+                views: '1.2k',
+                live: true,
             },
         },
-        {
-            id: 'r06',
-            type: SearchResultType.Profile,
-            item: {
-                userName: 'G6Homi',
-                image: '/images/profiles/profile01.jpg',
-            },
-        },
-        {
-            id: 'r07',
-            type: SearchResultType.Profile,
-            item: {
-                userName: 'G6Homi',
-                image: '/images/profiles/profile01.jpg',
-            },
-        },
-        {
-            id: 'r08',
-            type: SearchResultType.Profile,
-            item: {
-                userName: 'G6Homi',
-                image: '/images/profiles/profile01.jpg',
-            },
-        },
-        {
-            id: 'r09',
-            type: SearchResultType.Profile,
-            item: {
-                userName: 'G6Homi',
-                image: '/images/profiles/profile01.jpg',
-            },
-        },
-        {
-            id: 'r10',
-            type: SearchResultType.Profile,
-            item: {
-                userName: 'G6Homi',
-                image: '/images/profiles/profile01.jpg',
-            },
-        },
-        {
-            id: 'r11',
-            type: SearchResultType.Profile,
-            item: {
-                userName: 'G6Homi',
-                image: '/images/profiles/profile01.jpg',
-            },
-        },
-        {
-            id: 'r12',
-            type: SearchResultType.Profile,
-            item: {
-                userName: 'G6Homi',
-                image: '/images/profiles/profile01.jpg',
-            },
-        },
-        {
-            id: 'r13',
-            type: SearchResultType.Profile,
-            item: {
-                userName: 'G6Homi',
-                image: '/images/profiles/profile01.jpg',
-            },
-        },
-        {
-            id: 'r14',
-            type: SearchResultType.Profile,
-            item: {
-                userName: 'G6Homi',
-                image: '/images/profiles/profile01.jpg',
-            },
-        },
-    ];
+        // {
+        //     id: 'r02',
+        //     type: SearchResultType.Profile,
+        //     item: {
+        //         userName: 'G6Homi',
+        //         profile: {
+        //             photo: '/images/profiles/profile01.jpg',
+        //         }
+        //     },
+        // },
+        // {
+        //     id: 'r03',
+        //     type: SearchResultType.Profile,
+        //     item: {
+        //         userName: 'G6Homi',
+        //         image: '/images/profiles/profile01.jpg',
+        //     },
+        // },
+        // {
+        //     id: 'r04',
+        //     type: SearchResultType.Profile,
+        //     item: {
+        //         userName: 'G6Homi',
+        //         image: '/images/profiles/profile01.jpg',
+        //     },
+        // },
+        // {
+        //     id: 'r05',
+        //     type: SearchResultType.Profile,
+        //     item: {
+        //         userName: 'G6Homi',
+        //         image: '/images/profiles/profile01.jpg',
+        //     },
+        // },
+        // {
+        //     id: 'r06',
+        //     type: SearchResultType.Profile,
+        //     item: {
+        //         userName: 'G6Homi',
+        //         image: '/images/profiles/profile01.jpg',
+        //     },
+        // },
+        // {
+        //     id: 'r07',
+        //     type: SearchResultType.Profile,
+        //     item: {
+        //         userName: 'G6Homi',
+        //         image: '/images/profiles/profile01.jpg',
+        //     },
+        // },
+        // {
+        //     id: 'r08',
+        //     type: SearchResultType.Profile,
+        //     item: {
+        //         userName: 'G6Homi',
+        //         image: '/images/profiles/profile01.jpg',
+        //     },
+        // },
+        // {
+        //     id: 'r09',
+        //     type: SearchResultType.Profile,
+        //     item: {
+        //         userName: 'G6Homi',
+        //         image: '/images/profiles/profile01.jpg',
+        //     },
+        // },
+        // {
+        //     id: 'r10',
+        //     type: SearchResultType.Profile,
+        //     item: {
+        //         userName: 'G6Homi',
+        //         image: '/images/profiles/profile01.jpg',
+        //     },
+        // },
+        // {
+        //     id: 'r11',
+        //     type: SearchResultType.Profile,
+        //     item: {
+        //         userName: 'G6Homi',
+        //         image: '/images/profiles/profile01.jpg',
+        //     },
+        // },
+        // {
+        //     id: 'r12',
+        //     type: SearchResultType.Profile,
+        //     item: {
+        //         userName: 'G6Homi',
+        //         image: '/images/profiles/profile01.jpg',
+        //     },
+        // },
+        // {
+        //     id: 'r13',
+        //     type: SearchResultType.Profile,
+        //     item: {
+        //         userName: 'G6Homi',
+        //         image: '/images/profiles/profile01.jpg',
+        //     },
+        // },
+        // {
+        //     id: 'r14',
+        //     type: SearchResultType.Profile,
+        //     item: {
+        //         userName: 'G6Homi',
+        //         image: '/images/profiles/profile01.jpg',
+        //     },
+        // },
+    ]);
 
     const [search, setSearch] = useState('');
     const [tabId, setTabId] = useState(tabs[0].id);
     const [tabType, setTabType] = useState(SearchResultType.Stream);
+
+    useEffect(() => {
+        setResults(prevState => { 
+            const userList = users.map(user => ({ id: user.id, item: user, type: SearchResultType.Profile}));
+            const newList = [...prevState, ...userList];
+            return newList;
+        });
+    }, []);
+
+    useEffect(() => {
+        console.log(results);
+    }, [results]);
 
     return (
         <Container>
@@ -248,16 +320,21 @@ export const getServerSideProps = async ({ req }) => {
 
     if (!session || !session.currentUser) {
         return {
-        redirect: {
-            destination: '/guest',
-            permament: false,
-        }
+            redirect: {
+                destination: '/guest',
+                permament: false,
+            }
         };
     }
 
+    const client = buildClient({ req });
+
+    const { data: { users } } = await client.get('user', header(session.jwt));
+
     return {
         props: {
-        session,
+            session,
+            users,
         }
     }
 }

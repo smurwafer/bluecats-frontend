@@ -6,9 +6,19 @@ export const Container = styled.div`
 `;
 
 export const ButtonSection = styled.div`
-    width: 40%;
+    width: 500px;
     display: flex;
     flex-direction: row;
     align-items: center;
     padding: 20px;
+
+    @media (max-width: 600px) {
+        width: 100%;
+        padding: 10px;
+    }
+
+    @media (max-width: 405px) {
+        width: 100%;
+        display: contents;
+    }
 `;

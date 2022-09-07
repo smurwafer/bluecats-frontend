@@ -1,11 +1,16 @@
-import { getSession, useSession } from 'next-auth/react';
+import { getSession } from 'next-auth/react';
+import { useEffect } from 'react';
+import { buildClient } from '../axios-config';
 import Header from '../components/header';
 import OnlineList from '../components/online-list';
 import StreamList from '../components/stream-list';
+import socket from '../socket.io-config';
 import { Container } from '../styles/pages/home';
 import Space from '../styles/ui/space';
+import { header } from '../utility/header';
 
-const Home = () => {
+const Home = ({ session, streams, users }) => {
+
   const list = [
     {
       id: 's01',
@@ -130,18 +135,10 @@ const Home = () => {
         name={'Charlie Green'}
         rating={4.4}
       />
-      <OnlineList list={onlineList} />
+      <OnlineList list={users} />
       <StreamList
         legend={'Trending Today'}
-        list={list}
-      />
-      <StreamList
-        legend={'Trending Today'}
-        list={list}
-      />
-      <StreamList
-        legend={'Trending Today'}
-        list={list}
+        list={streams}
       />
       <Space vertical={30} />
     </Container>    
@@ -159,9 +156,16 @@ export const getServerSideProps = async ({ req }) => {
     };
   }
 
+  const client = buildClient({ req });
+  
+  const { data: { users } } = await client.get('user', header(session.jwt));
+  const { data: { streams } } = await client.get('stream', header(session.jwt));
+
   return {
     props: {
       session,
+      users,
+      streams,
     }
   }
 }

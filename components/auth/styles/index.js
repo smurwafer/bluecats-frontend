@@ -16,12 +16,26 @@ export const Container = styled.div`
     border-radius: 5px;
     border: 0.5px solid #ccc;
     overflow: hidden;
+
+    @media (max-width: 800px) {
+        display: block;
+        width: 400px;
+    }
+
+    @media (max-width: 405px) {
+        width: 90%;
+        border: none;
+    }
 `;
 
 export const Display = styled.div`
     flex: 1;
     position: relative;
     height: 100%;
+    
+    @media (max-width: 800px) {
+        display: none;
+    }
 `;
 
 export const FieldArea = styled.div`

@@ -3,12 +3,20 @@ import colorMap from '../../../styles/ui/utility/color-config';
 
 export const Container = styled.div`
     padding: 20px;
+
+    @media (max-width: 600px) {
+        padding: 10px;
+    }
 `;
 
 export const UpperSection = styled.div`
     height: 300px;
     display: flex;
     flex-direction: row;
+
+    @media (max-width: 600px) {
+        display: contents;
+    }
 `;
 
 export const Display = styled.div`
@@ -18,6 +26,11 @@ export const Display = styled.div`
     border: 0.5px solid #ccc;
     position: relative;
     overflow: hidden;
+
+    @media (max-width: 600px) {
+        height: 300px;
+        margin: auto;
+    }
 `;
 
 export const Info = styled.div`
@@ -26,24 +39,49 @@ export const Info = styled.div`
     flex: 1;
     display: flex;
     flex-direction: column;
+
+    @media (max-width: 600px) {
+        text-align: center;
+    }
 `;
 
 export const UserName = styled.p`
     font-size: 48px;
     color: ${() => `${colorMap['primary'].normal}`};
     margin: 0;
+
+    @media (max-width: 600px) {
+        font-size: 40px;
+    }
+
+    @media (max-width: 405px) {
+        font-size: 34px;
+    }
 `;
 
 export const Email = styled.p`
     font-size: 18px;
     color: ${() => `${colorMap['secondary'].normal}`};
     margin: 0;
+
+    @media (max-width: 600px) {
+        font-size: 16px;
+    }
+
+    @media (max-width: 405px) {
+        font-size: 14px;
+    }
 `;
 
 export const InfoContainer = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
+
+    @media (max-width: 600px) {
+        width: fit-content;
+        margin: auto;
+    }
 `;
 
 export const Label = styled.p`
@@ -57,12 +95,28 @@ export const Text = styled.p`
     font-size: 15px;
     color: ${() => `${colorMap['secondary'].normal}`};
     margin: 0;
+
+    @media (max-width: 600px) {
+        font-size: 13px;
+    }
+
+    @media (max-width: 405px) {
+        font-size: 12px;
+    }
 `;
 
 export const Description = styled.p`
     font-size: 15px;
     color: ${() => `${colorMap['secondary'].normal}`};
     margin: 0;
+
+    @media (max-width: 600px) {
+        font-size: 13px;
+    }
+
+    @media (max-width: 405px) {
+        font-size: 12px;
+    }
 `;
 
 export const MiddleSection = styled.div`

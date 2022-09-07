@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addGallery, signup } from '../../store/actions';
 import { message } from 'antd';
 import getList from '../../styles/ui/pinboard/config/list';
+import Pincoder from '../../styles/ui/pincoder';
 
 const Auth = ({ type = 'login' }) => {
     const router = useRouter();
@@ -205,21 +206,21 @@ const Auth = ({ type = 'login' }) => {
                     <Space vertical={30} />
                 </FormSection>,
 
-                // <FormSection>
-                //     <FormHeader>
-                //         <PrevIcon>
-                //             <BiArrowBack size={iconSize} color={iconColor} onClick={prev} />
-                //         </PrevIcon>
-                //     </FormHeader>
-                //     <Pincoder
-                //         type={'email'}
-                //         legend={'Email verification'}
-                //         text={'An verification code has been sent to your entered email address, please enter that code for verification here.'}
-                //     />
-                //     <Space flexed />
-                //     <Button block onClick={next}>Next</Button>
-                //     {/* <Space vertical={10} /> */}
-                // </FormSection>,
+                <FormSection>
+                    <FormHeader>
+                        <PrevIcon>
+                            <BiArrowBack size={iconSize} color={iconColor} onClick={prev} />
+                        </PrevIcon>
+                    </FormHeader>
+                    <Pincoder
+                        type={'email'}
+                        legend={'Email verification'}
+                        text={'An verification code has been sent to your entered email address, please enter that code for verification here.'}
+                    />
+                    <Space flexed />
+                    <Button block onClick={next}>Next</Button>
+                    {/* <Space vertical={10} /> */}
+                </FormSection>,
 
                 <FormSection>
                     <FormHeader>

@@ -19,7 +19,7 @@ const ProfileDeactivatePage = () => {
                 <Form>
                     <Input label='Password' text={password} setText={setPassword} block placeholder={'Password'} />
                     <Space vertical={20} />
-                    <Button borderRadius={5} onClick={sendDeactivationPin}>Send Account Deactivation Pin</Button>
+                    <Button borderRadius={3} size={'small'} onClick={sendDeactivationPin}>Send Account Deactivation Pin</Button>
                     <Space vertical={20} />
                     <Input label='Deactivation Pin' text={deactivationPin} setText={setDeactivationPin} block placeholder={'Pin'} />
                     <Space vertical={20} />

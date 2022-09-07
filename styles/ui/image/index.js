@@ -1,14 +1,14 @@
 import Img from 'next/image';
 import PropTypes from 'prop-types';
 
-const Image = ({ src, alt, height, width }) => {
+const Image = ({ src, alt, height, width, objectFit = 'cover' }) => {
     if (height && width) {
         return <Img
             loader={() => src}
             src={src}
             height={height}
             width={width}
-            objectFit={'cover'}
+            objectFit={objectFit}
         />
     }
 
@@ -16,7 +16,7 @@ const Image = ({ src, alt, height, width }) => {
         loader={() => src}
         src={src}
         layout={'fill'}
-        objectFit={'cover'}
+        objectFit={objectFit}
     />;
 }
 
@@ -25,6 +25,7 @@ Image.propTypes = {
     alt: PropTypes.string,
     height: PropTypes.number,
     width: PropTypes.number,
+    objectFit: PropTypes.oneOf(['cover', 'contain']),
 };
 
 export default Image;

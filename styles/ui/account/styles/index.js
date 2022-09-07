@@ -15,6 +15,7 @@ export const Circle = styled.div`
     overflow: hidden;
     border: ${({ bordered }) => bordered ? `0.5px solid #ccc` : 'none'};
     margin: auto;
+    background-color: ${() => `${colorMap['secondary'].light2}`};
 `;
 
 export const Square = styled.div`
@@ -25,6 +26,7 @@ export const Square = styled.div`
     overflow: hidden;
     border: ${({ bordered }) => bordered ? `0.5px solid #ccc` : 'none'};
     margin: auto;
+    background-color: ${() => `${colorMap['secondary'].light2}`};
 `;
 
 export const Text = styled.p`

@@ -9,32 +9,31 @@ import Views from "../../styles/ui/views";
 import Tag from "../../styles/ui/tag";
 import Position from "../../styles/ui/utility/category/position-type";
 import AccountType from "../../styles/ui/utility/category/account-type";
+import { galleryUrl } from "../../utility/media-url";
 
 const Stream = ({
     stream: {
+        id,
         title,
-        gallery: [{ image, caption }],
-        url,
+        description,
+        thumbnail,
+        gallery,
         live,
-        views,
-        creator: { 
-            userName,
-            profile,
-        }
+        channel,
     }
 }) => {
     const router = useRouter();
 
     const goToStreamView = () => {
-        router.push('/stream/view');
+        router.push('/stream/' + id);
     }
 
     return (
         <Container>
             <Display onClick={goToStreamView}>
                 <Image
-                    src={image}
-                    alt={caption}
+                    src={galleryUrl(thumbnail)}
+                    alt={thumbnail.caption}
                 />
                 {live && <Tag text={'Live'} color={'danger'} />}
                 <Views views={'1.2k'} /> 
@@ -43,8 +42,8 @@ const Stream = ({
             <Creator>
                 <Profile>
                     <Account
-                        url={profile.image}
-                        alt={profile.userName}
+                        url={galleryUrl(channel.photo)}
+                        alt={channel.name}
                         size={30}
                         type={AccountType.Square}
                     />
@@ -52,7 +51,7 @@ const Stream = ({
                 <Space horizontal={10} />
                 <Info>
                     <Title>{title}</Title>
-                    <UserName>{userName}</UserName>
+                    <UserName>{channel.name}</UserName>
                 </Info>
                 <Space flexed />
                 <Action>

@@ -11,7 +11,7 @@ export const Container = styled.div`
     background-color: ${({ color }) => `${colorMap[color].normal}`};
     border-radius: 5px;
     text-align: center;
-    padding: 5px;
+    padding: 2px 5px;
 `;
 
 export const Text = styled.p`

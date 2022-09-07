@@ -11,12 +11,12 @@ export const galleryUrl = ({ url, caption, type, isResourceUrl }) => {
 
     if (isResourceUrl) {
         if (type === 'image') {
-            if (!url || url.trim().length === 0)
-                return defaultImage;
+            // if (!url || url.trim().length === 0)
+            //     return defaultImage;
             return url;
         } else {
-            if (!url || url.trim().length === 0)
-                return defaultImage;
+            // if (!url || url.trim().length === 0)
+            //     return defaultImage;
             return url;
         }
     }

@@ -1,5 +1,6 @@
 import Account from "../../styles/ui/account";
 import Space from "../../styles/ui/space";
+import { galleryUrl } from "../../utility/media-url";
 import { Container, Legend, List, ListItem } from "./styles";
 
 const OnlineList = ({ list = [] }) => { 
@@ -7,14 +8,14 @@ const OnlineList = ({ list = [] }) => {
         <Container>
             <Legend>Online Users</Legend>
             <List>
-                {list.map(({ image, self }) => (
+                {list.map((user) => (
                     <ListItem>
                         <Account
-                            url={image}
+                            url={galleryUrl(user.profile.photo)}
                             type={'square'}
                             size={100}
                             online={true}
-                            self={self}
+                            self={false}
                         />
                     </ListItem>
                 ))}

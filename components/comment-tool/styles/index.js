@@ -20,3 +20,8 @@ export const CommentListSection = styled.div`
 export const CommentInputSection = styled.div`
     padding: 20px;
 `;
+
+export const Dummy = styled.div`
+    float: left;
+    clear: both;
+`;

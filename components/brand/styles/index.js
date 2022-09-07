@@ -10,8 +10,15 @@ export const Text = styled.p`
     margin: 0;
     font-size: ${({ fontSize }) => fontSize + 'px'};
     font-weight: 600;
+    font-family: 'Caveat';
 
     ::first-letter {
         color: ${() => colorMap['primary'].normal};
+    }
+
+    @font-face {
+        font-family: 'Caveat';
+        src: url('/fonts/Caveat/static/Caveat-Bold.ttf');
+        font-weight: 600;
     }
 `;

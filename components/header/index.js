@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
 import Account from "../../styles/ui/account";
-import { Background, Container, Creator, Description, Detail, Info, Name, Overlay, Play, Profile, Ratings, Title } from "./styles";
+import { Background, Container, Creator, TextContainer, Description, Detail, Info, Name, Overlay, Play, Profile, Ratings, Title, EditButtonContainer, PlaySection, PlayContainer } from "./styles";
 import { AiFillStar } from 'react-icons/ai';
 import { BsPlayCircle } from 'react-icons/bs';
 import Space from '../../styles/ui/space';
+import Button from '../../styles/ui/button';
 
-const Header = ({ title, name, description, creatorUrl, backgroundUrl, rating }) => {
+const Header = ({ title, name, description, creatorUrl, backgroundUrl, rating, updateChannel }) => {
     const iconSize = 23;
     const iconColor = '#fff';
 
@@ -14,7 +15,13 @@ const Header = ({ title, name, description, creatorUrl, backgroundUrl, rating })
             <Background url={backgroundUrl}>
                 <Overlay>
                     <Detail>
-                        <Title>{title}</Title>
+                        <TextContainer>
+                            <Title>{title}</Title>
+                            <Space horizontal={20} />    
+                            {updateChannel && <EditButtonContainer>
+                                <Button size={'small'} borderRadius={5} onClick={updateChannel}>Update</Button>
+                            </EditButtonContainer>}
+                        </TextContainer>
                         <Space vertical={20} />
                         <Description>
                             {description}

@@ -7,11 +7,23 @@ export const Container = styled.div`
     width: 160px;
     border-radius: 5px;
     border: 0.5px solid #ccc;
-    padding: 20px;
+    padding: 15px 20px;
     background-color: ${() => `${colorMap['secondary'].light2}`};
     text-align: center;
     align-items: center;
     justify-content: center;
+
+    @media (max-width: 1000px) {
+        width: 150px;
+    }
+
+    @media (max-width: 800px) {
+        width: 145px;
+    }
+
+    @media (max-width: 600px) {
+        width: 138px;
+    }
 `;
 
 export const Subscriber = styled.p`

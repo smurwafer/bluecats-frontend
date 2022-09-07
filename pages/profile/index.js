@@ -33,6 +33,7 @@ const ProfilePage = ({ user, friends, channels }) => {
             <ButtonSection>
                 <Button block onClick={goToProfileUpdate}>Update Account</Button>
                 <Space horizontal={20} />
+                <Space vertical={10} />
                 <Button color={'danger'} block onClick={goToProfileDeactivate}>Deactivate Account</Button>
             </ButtonSection>
         </Container>

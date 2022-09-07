@@ -19,7 +19,7 @@ export const Body = styled.div``;
 
 export const FooterSection = styled.div`
     position: absolute;
-    height: 80px;
+    height: 50px;
     bottom: 0;
     left: 0;
     right: 0;

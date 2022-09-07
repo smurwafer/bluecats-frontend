@@ -114,7 +114,7 @@ const ProfileUpdatePage = ({ user, session }) => {
                         <Space vertical={20} />
                         <Input label='Age' text={age} setText={setAge} placeholder={'Age'} block />
                         <Space vertical={20} />
-                        <Pinboard bordered legend={'Select Your Interests'} pinList={interestList} selectedPins={selectedPins} setSelectedPins={setSelectedPins} />
+                        <Pinboard bordered size={'small'} legend={'Select Your Interests'} pinList={interestList} selectedPins={selectedPins} setSelectedPins={setSelectedPins} />
                         <Space vertical={40} />
                         <Button block type='submit'>Update Account</Button>
                     </Info>

@@ -2,10 +2,14 @@ import styled from 'styled-components/macro';
 import colorMap from '../../utility/color-config';
 
 export const Container = styled.div`
+    height: 45px;
+`;
+
+export const CommentForm = styled.form`
     display: flex;
     flex-direction: row;
     align-items: center;
-    height: 45px;
+    height: 100%;
 `;
 
 export const InputSection = styled.div`
@@ -41,9 +45,14 @@ export const IconButton = styled.button`
     border: none;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
+
+    &:disabled {
+        background-color: ${() => `${colorMap['primary'].light2}`};
+    }
 `;
 
 export const IconText = styled.p`
     font-size: 16px;
     color: #fff;
+    margin: 0;
 `;

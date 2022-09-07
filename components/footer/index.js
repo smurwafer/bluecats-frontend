@@ -12,7 +12,6 @@ const Footer = () => {
             <Text>
                 Connect with us on other platform as well
             </Text>
-            <Space horizontal={20} />
             <Actions>
                 <Action>
                     <AiFillGoogleCircle size={iconSize} color={iconColor} />
